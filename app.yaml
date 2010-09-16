@@ -1,0 +1,16 @@
+application: datadinascita
+version: alpha-3
+runtime: python
+api_version: 1
+
+handlers:
+- url: /stylesheets
+  static_dir: stylesheets
+
+- url: /images/(.*\.(gif|png|jpg|ico))
+  static_files: static/\1
+  upload: static/(.*\.(gif|png|jpg|ico))
+
+- url: .*
+  script: main.py
+

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block list %}
+    {% ifnotequal people.count 0 %}
+        <ul>
+            {% for person in people %}
+                <li>
+                    <a href="#">
+                        {{ person.name }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endifnotequal %}
+{% endblock %}
