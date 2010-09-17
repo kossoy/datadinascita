@@ -1,14 +1,32 @@
 {% extends 'base.html' %}
 {% block list %}
-    {% ifnotequal people.count 0 %}
-        <ul>
+    {% ifnotequal count 0 %}
+        <table width="100%">
+            <tr>
+                <th>Name</th>
+                <th>Birthday</th>
+                <th>Age</th>
+                <th>Next BD</th>
+            </tr>
             {% for person in people %}
-                <li>
-                    <a href="#">
-                        {{ person.name }}
-                    </a>
-                </li>
+                <tr>
+                    <td>
+                        <h4>
+                            {{ person.name }}
+                        </h4>
+                    </td>
+                    <td>
+                        {{ person.birthday|date:"D, jS F Y" }}
+                    </td>
+                    <td>
+                        {{ person.age }}
+                    </td>
+                    <td>
+                        {{ person.next_bd }}
+                    </td>
+                </tr>
             {% endfor %}
-        </ul>
+        </table>
     {% endifnotequal %}
+    <a href="/add">Add new</a>
 {% endblock %}

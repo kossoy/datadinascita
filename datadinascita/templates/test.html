@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html dir="ltr">
+
+<head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dojo/dojo.xd.js"
+            djConfig="parseOnLoad: true">
+    </script>
+    <script type="text/javascript">
+        dojo.require("dijit.dijit"); // loads the optimized dijit layer
+        dojo.require("dijit._Calendar");
+    </script>
+
+    <link rel="stylesheet" type="text/css"
+          href="http://ajax.googleapis.com/ajax/libs/dojo/1.5/dijit/themes/claro/claro.css"
+            />
+    <style type="text/css">
+        body, html {
+            font-family: helvetica, arial, sans-serif;
+            font-size: 90%;
+        }
+    </style>
+    <style type="text/css">
+        .claro table.dijitCalendarContainer {
+            margin: 25px auto;
+        }
+
+        #formatted {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body class=" claro ">
+<div dojoType="dijit._Calendar"
+     onChange="dojo.byId('formatted').innerHTML=dojo.date.locale.format(arguments[0], {formatLength: 'full', selector:'date'})">
+</div>
+<p id="formatted">
+</p>
+</body>
+
+
+</html>

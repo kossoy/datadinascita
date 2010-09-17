@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru">
 
 <!--
@@ -9,318 +9,128 @@ Last Modified: 01-11-07
 
 -->
 
-
 <head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="keywords, here, seperated, by, commas" />
-<meta name="description" content="Brief description of web page." />
-<link rel="shortcut icon" href="/images/cubes_blue.ico" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="keywords, here, seperated, by, commas"/>
+    <meta name="description" content="Brief description of web page."/>
+    <link rel="shortcut icon" href="/images/cubes_blue.ico"/>
 
-<!-- link to external style sheet -->
-<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <title>Data di nascita - Birthdays of your friends</title>
 
-<title>Data di nascita - Birthdays of you friends</title>
+    <!-- link to external style sheet -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
+    <script src="http://www.google.com/jsapi?key=ABQIAAAAgjKkOnlgGzVIZKiZZka9sRTwMZqzUZKBAb5lcYIkQOxpyZI_XxSU-NdyvlWvZ21pP2RbkRfvJBjVgw"
+            type="text/javascript"></script>
+
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet"
+          type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#id_birthday").datepicker({
+                changeYear: true,
+                changeMonth: true,
+                yearRange: '-199',
+                maxDate: '+0d'
+            });
+        });
+    </script>
 
 </head>
 
 <body>
 
 <div id="top_section">
-<p>
-     <a href="#">Data di nascita</a> - Birthdays of you friends
-</p>
-</div> <!-- end top section -->
+    <p>
+        <a href="/">Data di nascita</a> - Birthdays of your friends
+    </p>
+</div>
+<!-- end top section -->
 
 <div id="middle_section">
 
-<div id="header">
+    <div id="header">
 
-<div id="header_left">
-     <h1><a href="#">Data di nascita</a></h1>
-     <h2>Birthdays of you friends</h2>
-</div>
+        <div id="header_left">
+            <h1><a href="/">Data di nascita</a></h1>
 
-<div id="header_right"></div>
+            <h2>Birthdays of your friends</h2>
+        </div>
 
-<div class="spacer"></div>
+        <div id="header_right"></div>
 
-</div>
+        <div class="spacer"></div>
 
-<div id="menu_bar">
+    </div>
 
-<div id="navcontainer">
-<ul id="navlist">
-<li><a href="/add">Add</a></li>
-<li><a href="#">Item two</a></li>
-<li><a href="#">Item three</a></li>
-<li><a href="#">Item four</a></li>
-<li><a href="#">Item five</a></li>
-</ul>
-</div>
+    <div id="menu_bar">
 
-</div>
+        <div id="navcontainer">
+            <ul id="navlist">
+                <li><a href="/add">Add</a></li>
+            </ul>
+        </div>
 
-<div id="content_wrapper">
-<div id="content_column">
-<div class="column_padding">
+    </div>
 
-<h1><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vestibulum vitae metus.</a></h1>
+    <div id="content_wrapper">
+        <div id="content_column">
+            <div class="column_padding">
 
-<div class="photo_frame"><img src="/images/paper_clips.jpg" alt="Paper Clips" /></div>
+                {% block formadd %}
+                {% endblock %}
 
-    {% block formadd %}{% endblock %}
-<p>
-     Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-Жёппа
-     Vestibulum vitae metus. Donec auctor nibh vitae sem.
-     Curabitur tincidunt ornare eros. Duis egestas arcu ac risus.
-     Sed ultricies lectus non nulla. Vestibulum ante ipsum primis
-     in faucibus orci luctus et ultrices posuere cubilia Curae;
-     Nulla aliquet nisi a lorem. Aliquam erat volutpat. Sed
-     commodo nibh id lacus. Vivamus eget tellus. Nullam
-     venenatis nulla in pede. Quisque pharetra elementum
-     purus. Mauris posuere orci ac erat. Mauris ac ipsum. In
-     quis lectus ac nulla mattis auctor. Aliquam sollicitudin
-     quam vitae augue eleifend blandit.
-</p>
+                {% block list %}
+                {% endblock %}
 
-<p>
-     Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-     Vestibulum vitae metus. Donec auctor nibh vitae sem.
-     Curabitur tincidunt ornare eros. Duis egestas arcu ac risus.
-     Sed ultricies lectus non nulla. Vestibulum ante ipsum primis
-     in faucibus orci luctus et ultrices posuere cubilia Curae;
-     Nulla aliquet nisi a lorem. Aliquam erat volutpat. Sed
-     commodo nibh id lacus. Vivamus eget tellus. Nullam
-     venenatis nulla in pede. Quisque pharetra elementum
-     purus. Mauris posuere orci ac erat. Mauris ac ipsum. In
-     quis lectus ac nulla mattis auctor. Aliquam sollicitudin
-     quam vitae augue eleifend blandit.
-</p>
+            </div>
+        </div>
+    </div>
 
-<h1><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vestibulum vitae metus.</a></h1>
+    <div id="left_column">
+        <div class="column_padding">
 
-<div class="photo_frame"><img src="/images/notepad.jpg" alt="Notepad" /></div>
-
-<p>
-     Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-     Vestibulum vitae metus. Donec auctor nibh vitae sem.
-     Curabitur tincidunt ornare eros. Duis egestas arcu ac risus.
-     Sed ultricies lectus non nulla. Vestibulum ante ipsum primis
-     in faucibus orci luctus et ultrices posuere cubilia Curae;
-     Nulla aliquet nisi a lorem. Aliquam erat volutpat. Sed
-     commodo nibh id lacus. Vivamus eget tellus. Nullam
-     venenatis nulla in pede. Quisque pharetra elementum
-     purus. Mauris posuere orci ac erat. Mauris ac ipsum. In
-     quis lectus ac nulla mattis auctor. Aliquam sollicitudin
-     quam vitae augue eleifend blandit.
-</p>
-
-<blockquote>
-<p>
-     Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-     Vestibulum vitae metus. Donec auctor nibh vitae sem.
-</p>
-</blockquote>
-
-<p>
-     Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-     Vestibulum vitae metus. Donec auctor nibh vitae sem.
-     Curabitur tincidunt ornare eros. Duis egestas arcu ac risus.
-     Sed ultricies lectus non nulla. Vestibulum ante ipsum primis
-     in faucibus orci luctus et ultrices posuere cubilia Curae;
-     Nulla aliquet nisi a lorem. Aliquam erat volutpat. Sed
-     commodo nibh id lacus. Vivamus eget tellus. Nullam
-     venenatis nulla in pede. Quisque pharetra elementum
-     purus. Mauris posuere orci ac erat. Mauris ac ipsum. In
-     quis lectus ac nulla mattis auctor. Aliquam sollicitudin
-     quam vitae augue eleifend blandit.
-</p>
-
-<p>
-     Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-     Vestibulum vitae metus. Donec auctor nibh vitae sem.
-     Curabitur tincidunt ornare eros. Duis egestas arcu ac risus.
-     Sed ultricies lectus non nulla. Vestibulum ante ipsum primis
-     in faucibus orci luctus et ultrices posuere cubilia Curae;
-     Nulla aliquet nisi a lorem. Aliquam erat volutpat. Sed
-     commodo nibh id lacus. Vivamus eget tellus. Nullam
-     venenatis nulla in pede. Quisque pharetra elementum
-     purus. Mauris posuere orci ac erat. Mauris ac ipsum. In
-     quis lectus ac nulla mattis auctor. Aliquam sollicitudin
-     quam vitae augue eleifend blandit.
-</p>
-
-<h1><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Vestibulum vitae metus.</a></h1>
-
-<p>
-     Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-     Vestibulum vitae metus. Donec auctor nibh vitae sem.
-     Curabitur tincidunt ornare eros. Duis egestas arcu ac risus.
-     Sed ultricies lectus non nulla. Vestibulum ante ipsum primis
-     in faucibus orci luctus et ultrices posuere cubilia Curae;
-     Nulla aliquet nisi a lorem. Aliquam erat volutpat. Sed
-     commodo nibh id lacus. Vivamus eget tellus. Nullam
-     venenatis nulla in pede. Quisque pharetra elementum
-     purus. Mauris posuere orci ac erat. Mauris ac ipsum. In
-     quis lectus ac nulla mattis auctor. Aliquam sollicitudin
-     quam vitae augue eleifend blandit.
-</p>
-
-<p>
-     Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-     Vestibulum vitae metus. Donec auctor nibh vitae sem.
-     Curabitur tincidunt ornare eros. Duis egestas arcu ac risus.
-     Sed ultricies lectus non nulla. Vestibulum ante ipsum primis
-     in faucibus orci luctus et ultrices posuere cubilia Curae;
-     Nulla aliquet nisi a lorem. Aliquam erat volutpat. Sed
-     commodo nibh id lacus. Vivamus eget tellus. Nullam
-     venenatis nulla in pede. Quisque pharetra elementum
-     purus. Mauris posuere orci ac erat. Mauris ac ipsum. In
-     quis lectus ac nulla mattis auctor. Aliquam sollicitudin
-     quam vitae augue eleifend blandit.
-</p>
-
-</div>
-</div>
-</div>
-
-<div id="left_column">
-<div class="column_padding">
-
-<h4>Section Title Here</h4>
-
-<p>
-     commodo nibh id lacus. Vivamus eget tellus. Nullam
-     venenatis nulla in pede. Quisque pharetra elementum
-     purus. Mauris posuere orci ac erat. Mauris ac ipsum. In
-     quis lectus ac nulla mattis auctor. Aliquam sollicitudin
-     quam vitae augue eleifend blandit.
-</p>
-
-<ul>
-	<li><a href="#">Sub Link One</a></li>
-	<li><a href="#">Sub Link Two</a></li>
-	<li><a href="#">Sub Link Three</a></li>
-	<li><a href="#">Sub Link Four</a></li>
-	<li><a href="#">Sub Link Five</a></li>
-    <li><a href="#">Sub Link Six</a></li>
-	<li><a href="#">Sub Link Seven</a></li>
-	<li><a href="#">Sub Link Eight</a></li>
-	<li><a href="#">Sub Link Nine</a></li>
-	<li><a href="#">Sub Link Ten</a></li>
-</ul>
-
-<h4>Section Title Here</h4>
-
-<p>
-     commodo nibh id lacus. Vivamus eget tellus. Nullam
-     venenatis nulla in pede. Quisque pharetra elementum
-     purus. Mauris posuere orci ac erat. Mauris ac ipsum. In
-     quis lectus ac nulla mattis auctor. Aliquam sollicitudin
-     quam vitae augue eleifend blandit.
-</p>
-
-<h4>Section Title Here</h4>
-
-<ul>
-	<li><a href="#">Sub Link One</a></li>
-	<li><a href="#">Sub Link Two</a></li>
-	<li><a href="#">Sub Link Three</a></li>
-	<li><a href="#">Sub Link Four</a></li>
-	<li><a href="#">Sub Link Five</a></li>
-</ul>
-<h4>Section Title Here</h4>
-
-<p>
-     commodo nibh id lacus. Vivamus eget tellus. Nullam
-     venenatis nulla in pede. Quisque pharetra elementum
-     purus. Mauris posuere orci ac erat. Mauris ac ipsum. In
-     quis lectus ac nulla mattis auctor. Aliquam sollicitudin
-     quam vitae augue eleifend blandit.
-</p>
-
-</div>
-</div>
+        </div>
+    </div>
 
 
-<div id="right_column">
-<div class="column_padding">
-
-<h4>Friends' BD</h4>
-
-<p>
-     People are stupid.
-</p>
-
-{% block list %}{% endblock %}
-
-<h4>Section Title Here</h4>
-
-<p>
-     commodo nibh id lacus. Vivamus eget tellus. Nullam
-     venenatis nulla in pede. Quisque pharetra elementum
-     purus. Mauris posuere orci ac erat. Mauris ac ipsum. In
-     quis lectus ac nulla mattis auctor. Aliquam sollicitudin
-     quam vitae augue eleifend blandit.
-</p>
-
-<h4>Section Title Here</h4>
-
-<ul>
-	<li><a href="#">Sub Link One</a></li>
-	<li><a href="#">Sub Link Two</a></li>
-	<li><a href="#">Sub Link Three</a></li>
-	<li><a href="#">Sub Link Four</a></li>
-	<li><a href="#">Sub Link Five</a></li>
-</ul>
-
-<h4>Section Title Here</h4>
-
-<p>
-     commodo nibh id lacus. Vivamus eget tellus. Nullam
-     venenatis nulla in pede. Quisque pharetra elementum
-     purus. Mauris posuere orci ac erat. Mauris ac ipsum. In
-     quis lectus ac nulla mattis auctor. Aliquam sollicitudin
-     quam vitae augue eleifend blandit.
-</p>
+    <div id="right_column">
+        <div class="column_padding">
 
 
-</div>
+        </div>
 
-</div>
+    </div>
 
-<div id="footer">
-<p>
-	Copyright &copy;2010 <a href="#">GluckSoft</a>, All Rights Reserved.<br />
-	Template courtesy of <a title="Designs By Darren - Free CSS Web Design Template" href="http://www.designsbydarren.com">Designs By Darren</a>.
-</p>
-</div>
+    <div id="footer">
+        <p>
+            Copyright &copy;2010 <a href="#">GluckSoft</a>, All Rights Reserved.<br/>
+            Template courtesy of <a title="Designs By Darren - Free CSS Web Design Template"
+                                    href="http://www.designsbydarren.com">Designs By Darren</a>.
+        </p>
+    </div>
 
 </div> <!-- end middle section -->
 
 <div id="bottom_section">
-<p>
-{#    <a title="Valid XHTML Transitional"#}
-{#       href="http://validator.w3.org/check?uri=referer"#}
-{#       target="new">Valid XHTML 1.0 Transitional</a> &middot;#}
-{#    <a title="Valid CSS 2.1"#}
-{#       href="http://jigsaw.w3.org/css-validator/validator?uri=http://datadinascita.appspot.com/stylesheets/style.css"#}
-{#       target="new">Valid CSS 2.1 </a>#}
-<a href="http://validator.w3.org/check?uri=referer"
-   title="Valid XHTML 1.0 Transitional"
-   target="new"><img class="w3c"
-        src="http://www.w3.org/Icons/valid-xhtml10"
-        alt="Valid XHTML 1.0 Transitional" /></a>
+    <p>
+        <a href="http://validator.w3.org/check?uri=referer"
+           title="Valid XHTML 1.0 Transitional"
+           target="new"><img class="w3c"
+                             src="http://www.w3.org/Icons/valid-xhtml10"
+                             alt="Valid XHTML 1.0 Transitional"/></a>
 
-<a href="http://jigsaw.w3.org/css-validator/check/referer"
-   title="Valid CSS!"
-   target="new"><img class="w3c"
-        src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
-        alt="Valid CSS!" /></a>
-</p>
-</div> <!-- end bottom section -->
+        <a href="http://jigsaw.w3.org/css-validator/check/referer"
+           title="Valid CSS!"
+           target="new"><img class="w3c"
+                             src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+                             alt="Valid CSS!"/></a>
+    </p>
+</div>
+<!-- end bottom section -->
 
 </body>
 </html>
