@@ -4,11 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from datadinascita.birthdays.models import Person
 from datadinascita.birthdays.forms import AddForm
-#from datetime import d
-import logging
 from google.appengine.api import users
-#import datetime
-#from datetime import date, datetime
 from datetime import *
 
 def test(request):
@@ -17,12 +13,27 @@ def test(request):
 def search(request):
     return render_to_response('search.html', {})
 
+def auth_user(back):
+    user = users.get_current_user()
+    if user:
+        auth_url = users.create_logout_url(back)
+    else:
+        auth_url = users.create_login_url(back)
+
+    return auth_url
+
 def list(request):
-    logging.info('Listed!')
-    people = modify_people(Person.all())
-    return render_to_response('list.html', {'people': people, 'count': len(people)})
+    if not users.get_current_user():
+        return HttpResponseRedirect(users.create_login_url('/people'))
+
+    people = modify_people(Person.all().filter("owner =", users.get_current_user()))
+
+    return render_to_response('list.html', {'people': people, 'count': len(people), 'auth_url': auth_user('/people')})
 
 def add(request):
+    if not users.get_current_user():
+        return HttpResponseRedirect(users.create_login_url('/add'))
+
     if request.method == 'POST':
         form = AddForm(request.POST)
         if form.is_valid():
@@ -32,13 +43,13 @@ def add(request):
             p.owner = users.get_current_user()
             p.birthday = datetime.date(datetime.strptime(birthday, "%m/%d/%Y"))
             p.put()
-        return HttpResponseRedirect('/people')
 
+        return HttpResponseRedirect('/people')
     else:
         form = AddForm()
 
     people = modify_people(Person.all().filter("owner =", users.get_current_user()))
-    return render_to_response('add.html', {'form': form, 'people': people})
+    return render_to_response('add.html', {'form': form, 'people': people, 'count': len(people), 'auth_url': auth_user('/add')})
 
 def modify_people(people):
     pp = []
