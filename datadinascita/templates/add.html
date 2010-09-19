@@ -1,7 +1,27 @@
 {% extends 'list.html' %}
+{% block jquery %}
+    <script src="http://www.google.com/jsapi?key=ABQIAAAAgjKkOnlgGzVIZKiZZka9sRTwMZqzUZKBAb5lcYIkQOxpyZI_XxSU-NdyvlWvZ21pP2RbkRfvJBjVgw"
+            type="text/javascript"></script>
 
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet"
+          type="text/css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#id_birthday").datepicker({
+                changeYear: true,
+                changeMonth: true,
+                yearRange: '-199',
+                maxDate: '+0d'
+            });
+        });
+    </script>
+
+{% endblock %}
 {% block formadd %}
-    <h1>Add Person</h1>
+    <h1>New Person</h1>
     <form action="." method="post">
         <table>
             {{ form.as_table }}
@@ -10,5 +30,4 @@
     </form>
 
 {% endblock %}
-
 {% block links %}{% endblock %}

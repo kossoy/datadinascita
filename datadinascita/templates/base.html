@@ -20,24 +20,11 @@ Last Modified: 01-11-07
 
     <!-- link to external style sheet -->
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css"/>
-    <script src="http://www.google.com/jsapi?key=ABQIAAAAgjKkOnlgGzVIZKiZZka9sRTwMZqzUZKBAb5lcYIkQOxpyZI_XxSU-NdyvlWvZ21pP2RbkRfvJBjVgw"
-            type="text/javascript"></script>
+    {% block jquery %}
+    {% endblock %}
+    {% block search %}
+    {% endblock %}
 
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet"
-          type="text/css"/>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $("#id_birthday").datepicker({
-                changeYear: true,
-                changeMonth: true,
-                yearRange: '-199',
-                maxDate: '+0d'
-            });
-        });
-    </script>
 
 </head>
 
@@ -70,7 +57,7 @@ Last Modified: 01-11-07
 
         <div id="navcontainer">
             <ul id="navlist">
-                <li><a href="/add">Add</a></li>
+                <li><a href="/add">New</a></li>
                 <li><a href="/search">Search</a></li>
                 <li><a href="/import">Import</a></li>
             </ul>
@@ -82,13 +69,20 @@ Last Modified: 01-11-07
         <div id="content_column">
             <div class="column_padding">
 
-                {% block formadd %}{% endblock %}
+                {% block formadd %}
+                {% endblock %}
 
-                {% block list %}{% endblock %}
+                {% block list %}
+                {% endblock %}
 
-                {% block formimport %}{% endblock %}
+                {% block formimport %}
+                {% endblock %}
 
-                {% block links %}{% endblock %}
+                {% block links %}
+                {% endblock %}
+
+                {% block searchcontrol %}
+                {% endblock %}
 
             </div>
         </div>
@@ -103,7 +97,6 @@ Last Modified: 01-11-07
 
     <div id="right_column">
         <div class="column_padding">
-
 
         </div>
 

@@ -1,39 +1,38 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <title>My Google AJAX Search API Application</title>
-    <script src="http://www.google.com/jsapi?key=ABQIAAAAgjKkOnlgGzVIZKiZZka9sRTwMZqzUZKBAb5lcYIkQOxpyZI_XxSU-NdyvlWvZ21pP2RbkRfvJBjVgw" type="text/javascript"></script>
+{% extends 'base.html' %}
+{% block search %}
+    <script src="http://www.google.com/jsapi?key=ABQIAAAAgjKkOnlgGzVIZKiZZka9sRTwMZqzUZKBAb5lcYIkQOxpyZI_XxSU-NdyvlWvZ21pP2RbkRfvJBjVgw"
+            type="text/javascript"></script>
     <script language="Javascript" type="text/javascript">
-    //<![CDATA[
+        //<![CDATA[
 
-    google.load("search", "1");
+        google.load("search", "1");
 
-    function OnLoad() {
-      // Create a search control
-      var searchControl = new google.search.SearchControl();
+        function OnLoad() {
+            // Create a search control
+            var searchControl = new google.search.SearchControl();
 
-      // Add in a full set of searchers
-      var localSearch = new google.search.LocalSearch();
-      searchControl.addSearcher(localSearch);
-      searchControl.addSearcher(new google.search.WebSearch());
-      searchControl.addSearcher(new google.search.VideoSearch());
-      searchControl.addSearcher(new google.search.BlogSearch());
+            // Add in a full set of searchers
+            var localSearch = new google.search.LocalSearch();
+            searchControl.addSearcher(localSearch);
+            searchControl.addSearcher(new google.search.WebSearch());
+            searchControl.addSearcher(new google.search.VideoSearch());
+            searchControl.addSearcher(new google.search.BlogSearch());
 
-      // Set the Local Search center point
-      localSearch.setCenterPoint("New York, NY");
+            // Set the Local Search center point
+            localSearch.setCenterPoint("New York, NY");
 
-      // Tell the searcher to draw itself and tell it where to attach
-      searchControl.draw(document.getElementById("searchcontrol"));
+            // Tell the searcher to draw itself and tell it where to attach
+            searchControl.draw(document.getElementById("searchcontrol"));
 
-      // Execute an inital search
-      searchControl.execute("Data di nascita");
-    }
-    google.setOnLoadCallback(OnLoad);
+            // Execute an inital search
+            searchControl.execute("Data di nascita");
+        }
+        google.setOnLoadCallback(OnLoad);
 
-    //]]>
+        //]]>
     </script>
-  </head>
-  <body>
+
+{% endblock %}
+{% block searchcontrol %}
     <div id="searchcontrol">Loading...</div>
-  </body>
-</html>
+{% endblock %}

@@ -4,7 +4,7 @@ import os
 DEBUG = True
 #DEBUG = False
 TEMPLATE_DEBUG = DEBUG
-APPEND_SLASH=False
+#APPEND_SLASH=False
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),

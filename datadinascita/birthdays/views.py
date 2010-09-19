@@ -8,6 +8,7 @@ from google.appengine.api import users
 from datetime import *
 from google.appengine.ext.blobstore import blobstore
 import logging
+import forms
 
 def test(request):
     return render_to_response('test.html', {})
@@ -34,13 +35,19 @@ def list(request):
 
 def csv_upload(request):
     if (request.method == 'POST'):
-        upload_files = request.FILES['file']
-        blob_info = upload_files[0]
-        logging.info(blob_info)
-        return render_to_response('csv.html', {'blob_info': blob_info})
-
+        logging.info(request)
+        try:
+            upload_files = request.FILES['file']
+            blob_info = upload_files[0]
+            logging.info(blob_info)
+            return render_to_response('csv.html', {'blob_info': blob_info})
+        except:
+            return HttpResponseRedirect('/import')
     else:
-        upload_url = blobstore.create_upload_url('/import')
+        try:
+            upload_url = blobstore.create_upload_url('/import/')
+        except:
+            upload_url = '.'
         return render_to_response('import.html', {'upload_url': upload_url})
 
 def add(request):
@@ -49,24 +56,38 @@ def add(request):
 
     if request.method == 'POST':
         form = AddForm(request.POST)
+
         if form.is_valid():
-            name = form.clean_data['name']
-            birthday = form.clean_data['birthday']
-            p = Person(name=name)
-            p.owner = users.get_current_user()
-            p.birthday = datetime.date(datetime.strptime(birthday, "%m/%d/%Y"))
-            p.put()
+            try:
+                name = form.clean_data['name']
+                birthday = form.clean_birthday()
+                p = Person(name=name)
+                p.owner = users.get_current_user()
+                p.birthday = datetime.date(datetime.strptime(birthday, "%m/%d/%Y"))
+            except:
+                return show_new_person(form)
+
+            a = p.put()
+            logging.info(a)
+        else:
+            return show_new_person(form)
 
         return HttpResponseRedirect('/people')
     else:
         form = AddForm()
 
+    return show_new_person(form)
+
+def show_new_person(form):
     people = modify_people(Person.all().filter("owner =", users.get_current_user()))
-    return render_to_response('add.html', {'form': form, 'people': people, 'count': len(people), 'auth_url': auth_user('/add')})
+    return render_to_response('add.html',
+                              {'form': form, 'people': people, 'count': len(people),
+                               'auth_url': auth_user('/add')})
 
 def modify_people(people):
     pp = []
     for person in people:
+        logging.info(person.birthday)
         today = datetime.date(datetime.today())
         this_year_birhtday = datetime.date(datetime(today.year, person.birthday.month, person.birthday.day))
 
