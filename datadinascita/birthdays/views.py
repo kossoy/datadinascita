@@ -6,6 +6,8 @@ from datadinascita.birthdays.models import Person
 from datadinascita.birthdays.forms import AddForm
 from google.appengine.api import users
 from datetime import *
+from google.appengine.ext.blobstore import blobstore
+import logging
 
 def test(request):
     return render_to_response('test.html', {})
@@ -29,6 +31,17 @@ def list(request):
     people = modify_people(Person.all().filter("owner =", users.get_current_user()))
 
     return render_to_response('list.html', {'people': people, 'count': len(people), 'auth_url': auth_user('/people')})
+
+def csv_upload(request):
+    if (request.method == 'POST'):
+        upload_files = request.FILES['file']
+        blob_info = upload_files[0]
+        logging.info(blob_info)
+        return render_to_response('csv.html', {'blob_info': blob_info})
+
+    else:
+        upload_url = blobstore.create_upload_url('/import')
+        return render_to_response('import.html', {'upload_url': upload_url})
 
 def add(request):
     if not users.get_current_user():

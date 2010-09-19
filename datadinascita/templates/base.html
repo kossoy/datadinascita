@@ -72,6 +72,7 @@ Last Modified: 01-11-07
             <ul id="navlist">
                 <li><a href="/add">Add</a></li>
                 <li><a href="/search">Search</a></li>
+                <li><a href="/import">Import</a></li>
             </ul>
         </div>
 
@@ -81,11 +82,13 @@ Last Modified: 01-11-07
         <div id="content_column">
             <div class="column_padding">
 
-                {% block formadd %}
-                {% endblock %}
+                {% block formadd %}{% endblock %}
 
-                {% block list %}
-                {% endblock %}
+                {% block list %}{% endblock %}
+
+                {% block formimport %}{% endblock %}
+
+                {% block links %}{% endblock %}
 
             </div>
         </div>
