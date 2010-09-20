@@ -1,6 +1,6 @@
 # Create your views here.
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 from datadinascita.birthdays.models import Person
 from datadinascita.birthdays.forms import AddForm
@@ -9,6 +9,7 @@ from datetime import *
 from google.appengine.ext.blobstore import blobstore
 import logging
 import forms
+import cgi
 
 def test(request):
     return render_to_response('test.html', {})
@@ -35,12 +36,8 @@ def list(request):
 
 def csv_upload(request):
     if (request.method == 'POST'):
-        logging.info(request)
         try:
-            upload_files = request.FILES['file']
-            blob_info = upload_files[0]
-            logging.info(blob_info)
-            return render_to_response('csv.html', {'blob_info': blob_info})
+            parse_upload(request)
         except:
             return HttpResponseRedirect('/import')
     else:
@@ -49,6 +46,58 @@ def csv_upload(request):
         except:
             upload_url = '.'
         return render_to_response('import.html', {'upload_url': upload_url})
+
+def parse_upload(request):
+    try:
+        uploads = get_uploads(request, 'file')
+        logging.info(uploads)
+        for upload in uploads:
+            file = BlobFile(blob=upload)
+            file.save()
+    except Exception, e:
+        return HttpResponseRedirect("/import")
+    return HttpResponse("Ok!")
+
+def get_uploads(request, field_name=None, populate_post=False):
+    """
+    http://appengine-cookbook.appspot.com/recipe/blobstore-get_uploads-helper-function-for-django-request/
+
+    Get uploads sent to this handler.
+
+    Args:
+    field_name: Only select uploads that were sent as a specific field.
+    populate_post: Add the non blob fields to request.POST
+
+    Returns:
+    A list of BlobInfo records corresponding to each upload.
+    Empty list if there are no blob-info records for field_name.
+    """
+
+    logging.info(request)
+    if hasattr(request,'__uploads') == False:
+        request.META['wsgi.input'].seek(0)
+        fields = cgi.FieldStorage(request.META['wsgi.input'], environ=request.META)
+
+        request.__uploads = {}
+        if populate_post:
+            request.POST = {}
+        for key in fields.keys():
+            field = fields[key]
+            if isinstance(field, cgi.FieldStorage) and 'blob-key' in field.type_options:
+                request.__uploads.setdefault(key, []).append(blobstore.parse_blob_info(field))
+            elif populate_post:
+                request.POST[key] = field.value
+
+    if field_name:
+        try:
+            return list(request.__uploads[field_name])
+        except KeyError:
+            return []
+    else:
+        results = []
+        for uploads in request.__uploads.itervalues():
+            results += uploads
+        return results
 
 def add(request):
     if not users.get_current_user():
