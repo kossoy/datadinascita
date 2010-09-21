@@ -2,6 +2,19 @@
 
 {% block formimport %}
     <h1>Import csv</h1>
+    <div style="border: 1px solid gray; width: 200px;">
+
+    <p>
+    12/31/1970, John Doe
+    <br />
+    2/29/1972, Unlucky Pal
+    <br />
+        ...
+    <br />
+        etc
+    </p>
+    </div>
+    <br />
     <form action="{{ upload_url }}" method="POST" enctype="multipart/form-data">
         <p>Upload File: <input type="file" name="file"></p>
         <p><input type="submit" value="Submit"></p>

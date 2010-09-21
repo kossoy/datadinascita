@@ -11,15 +11,19 @@ import csv
 from datetime import datetime
 
 
-class PhotoUploadHandler(blobstore_handlers.BlobstoreUploadHandler):
+class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
     def post(self):
         try:
             upload_files = self.get_uploads('file')
             blob_info = upload_files[0]
+            if blob_info.size > 1048576:
+                self.redirect('/upload_failure')
+
             csv_file = fetch_data(blob_info, 0, blob_info.size + 1)
             stringReader = csv.reader(StringIO(csv_file))
 
             for row in stringReader:
+                logging.info(row)
                 p = Person(name=row[1].decode('utf-8'))
                 p.owner = users.get_current_user()
                 p.birthday = datetime.date(datetime.strptime(row[0], "%m/%d/%Y"))
@@ -35,13 +39,19 @@ class fail(webapp.RequestHandler):
             <html>
             <body>
                 <h1 style="color: Red;">Failed</h1>
+                <p>Possibly, file is too big or not csv ('12/31/1970', 'Person name'\r\n, etc)</p>
                 <a href="/import/">Try again</a>
             <body>
             <html>
                                 ''')
 
+class test(webapp.RequestHandler):
+    def get(self):
+        self.response.out.write('Test')
+
 application = webapp.WSGIApplication([
-                                             ('/upload_csv/', PhotoUploadHandler),
+                                             ('/upload_csv/', UploadHandler),
+                                             ('/test/', test),
                                              ('/upload_failure/', fail),
                                              ], debug=True)
 

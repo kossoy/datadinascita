@@ -45,7 +45,7 @@ def export(request):
     # Create the CSV writer using the HttpResponse as the "file"
     writer = csv.writer(response)
     for person in people:
-        writer.writerow(["{0!s}/{1!s}/{2!s}".format(person.birthday.month, person.birthday.day, person.birthday.year),
+        writer.writerow(["%s/%s/%s" % (person.birthday.month, person.birthday.day, person.birthday.year),
                          person.name.encode('utf-8')])
 
     return response
