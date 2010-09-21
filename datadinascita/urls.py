@@ -7,5 +7,5 @@ urlpatterns = patterns('datadinascita.birthdays.views',
    (r'^search/$', 'search'),
    (r'^import/$', 'csv_upload'),
    (r'^test/$', 'test'),
-   (r'^upload/$', 'parse_upload'),
+   (r'^upload/$', 'upload_photo'),
 )

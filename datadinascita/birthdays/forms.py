@@ -11,3 +11,6 @@ class AddForm(forms.Form):
             raise forms.ValidationError("Invalid Date")
 
         return birthday
+
+class PhotoForm(forms.Form):
+    name = forms.CharField(required=True)
