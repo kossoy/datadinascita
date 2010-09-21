@@ -40,6 +40,16 @@ def csv_upload(request):
         upload_url = '.'
     return render_to_response('import.html', {'upload_url': upload_url})
 
+def erase(request):
+    if not users.get_current_user():
+        return HttpResponseRedirect(users.create_login_url('/add'))
+
+    people = Person.all()
+    for person in people:
+        person.delete()
+
+    return HttpResponseRedirect('/')
+
 def add(request):
     if not users.get_current_user():
         return HttpResponseRedirect(users.create_login_url('/add'))
