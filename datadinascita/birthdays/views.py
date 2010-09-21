@@ -8,7 +8,8 @@ from google.appengine.api import users
 from google.appengine.ext import blobstore
 
 from django.shortcuts import render_to_response
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+import csv
 
 def test(request):
     return render_to_response('test.html', {})
@@ -33,6 +34,22 @@ def list(request):
 
     return render_to_response('list.html', {'people': people, 'count': len(people), 'auth_url': auth_user('/people')})
 
+def export(request):
+    if not users.get_current_user():
+        return HttpResponseRedirect(users.create_login_url('/export'))
+
+    people = modify_people(Person.all().filter("owner =", users.get_current_user()))
+    response = HttpResponse(mimetype='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=birthdays.csv'
+
+    # Create the CSV writer using the HttpResponse as the "file"
+    writer = csv.writer(response)
+    for person in people:
+        writer.writerow([person.birthday, person.name.encode('utf-8')])
+
+    return response
+
+
 def csv_upload(request):
     try:
         upload_url = blobstore.create_upload_url('/upload_csv/')
@@ -44,7 +61,7 @@ def erase(request):
     if not users.get_current_user():
         return HttpResponseRedirect(users.create_login_url('/add'))
 
-    people = Person.all()
+    people = Person.all().filter("owner =", users.get_current_user())
     for person in people:
         person.delete()
 
@@ -87,7 +104,6 @@ def show_new_person(form):
 def modify_people(people):
     pp = []
     for person in people:
-        logging.info(person.birthday)
         today = datetime.date(datetime.today())
         this_year_birthday = datetime.date(datetime(today.year, person.birthday.month, person.birthday.day))
 
